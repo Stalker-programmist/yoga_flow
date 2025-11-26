@@ -25,4 +25,4 @@ def healthz():
     return {"ok": True, "env": settings.ENV}
 
 if __name__ == '__main__':
-    run()
+    run(app)
