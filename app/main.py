@@ -23,3 +23,6 @@ app.include_router(profile.router)
 @app.get("/healthz")
 def healthz():
     return {"ok": True, "env": settings.ENV}
+
+if __name__ == '__main__':
+    run()

@@ -73,6 +73,7 @@
   letter-spacing:0.08em;
   pointer-events:auto;
   cursor:pointer;
+  border:none;
   opacity:0;
   transition: opacity .2s ease;
 }
@@ -83,15 +84,15 @@
 .profile-menu{ position:relative; display:inline-flex; align-items:flex-start }
 .profile-split{
   display:inline-flex;
-  align-items:stretch;
+  align-items:center;
   border:1px solid rgba(0,0,0,.2);
   border-radius:999px;
   overflow:hidden;
-  background:transparent;
+  background:#fff;
 }
 .profile-name-toggle{
   border:none;
-  background:#fff;
+  background:transparent;
   font: inherit;
   font-size: clamp(26px, 4vw, 42px);
   font-weight:800;
@@ -107,7 +108,7 @@
 }
 .profile-caret-btn{
   border:none;
-  background:#fff;
+  background:transparent;
   padding:8px 12px;
   cursor:pointer;
   display:flex;

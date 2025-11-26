@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block page_styles %}
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+{% endblock %}
 {% block content %}
 <section
   class="container dashboard"
@@ -9,64 +12,78 @@
 >
   {% if user %}
   <header class="dashboard-hero" data-reveal>
-    <button class="avatar-xl" type="button" data-avatar-trigger aria-label="Изменить аватар">
-      <div class="avatar-shell" aria-live="polite">
-        {% if user.avatar_url %}
-          <img src="{{ user.avatar_url }}" alt="Аватар {{ user.username }}" data-avatar-img>
-          <span class="avatar-letter" data-avatar-letter-text hidden>{{ user.avatar_letter }}</span>
-        {% else %}
-          <img src="" alt="" data-avatar-img hidden>
-          <span class="avatar-letter" data-avatar-letter-text>{{ user.avatar_letter }}</span>
-        {% endif %}
-      </div>
-      <span class="avatar-edit-chip">изменить</span>
-    </button>
+    <div class="avatar-xl">
+      <button class="avatar-touch" type="button" data-avatar-trigger aria-label="Изменить аватар">
+        <div class="avatar-shell" aria-live="polite">
+          {% if user.avatar_url %}
+            <img src="{{ user.avatar_url }}" alt="Аватар {{ user.username }}" data-avatar-img>
+            <span class="avatar-letter" data-avatar-letter-text hidden>{{ user.avatar_letter }}</span>
+          {% else %}
+            <img src="" alt="" data-avatar-img hidden>
+            <span class="avatar-letter" data-avatar-letter-text>{{ user.avatar_letter }}</span>
+          {% endif %}
+        </div>
+      </button>
+      <button class="avatar-edit-chip" type="button" data-avatar-trigger aria-label="Изменить аватарку">изменить</button>
+    </div>
     <div class="profile-hello">
       <div class="greeting-row">
-        <h1 data-display-name>Привет, @{{ user.username }}</h1>
-        <button
-          class="profile-menu-toggle"
-          type="button"
-          data-profile-toggle
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <span aria-hidden="true">⌄</span>
-          <span class="sr-only">Открыть меню профиля</span>
-        </button>
-      </div>
-    </div>
-    <div class="profile-dropdown hidden" data-profile-Привет>
-      <form class="profile-form" data-username-form novalidate>
-        <label for="usernameField" class="muted small">Имя пользователя</label>
-        <div class="profile-input-row">
-          <input
-            id="usernameField"
-            name="username"
-            class="input"
-            type="text"
-            minlength="3"Dima
-            maxlength="20"
-            pattern="[A-Za-z0-9_-]{3,20}"
-            value="{{ user.username }}"
-            autocomplete="off"
-            data-username-input
-            required
-          >
-          <button class="btn btn-sm" type="submit">Сохранить</button>
+        <div class="profile-menu" data-profile-menu>
+          <div class="profile-split">
+            <button
+              class="profile-name-toggle"
+              type="button"
+              data-profile-toggle
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span data-display-name>Привет, {{ user.username }}</span>
+            </button>
+            <button
+              class="profile-caret-btn"
+              type="button"
+              data-profile-toggle
+              aria-label="Открыть меню профиля"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="profile-caret" aria-hidden="true">›</span>
+            </button>
+          </div>
+          <div class="profile-dropdown hidden" data-profile-dropdown>
+            <form class="profile-form" data-username-form novalidate>
+              <label for="usernameField" class="muted small">Имя пользователя</label>
+              <div class="profile-input-row">
+                <input
+                  id="usernameField"
+                  name="username"
+                  class="input"
+                  type="text"
+                  minlength="3"
+                  maxlength="20"
+                  pattern="[A-Za-zА-Яа-яЁё0-9_-]{3,20}"
+                  value="{{ user.username }}"
+                  autocomplete="off"
+                  data-username-input
+                  required
+                >
+                <button class="btn btn-sm" type="submit">Сохранить</button>
+              </div>
+              <div class="flash ok hidden" data-username-flash aria-live="polite"></div>
+            </form>
+            <button class="profile-link" type="button" data-avatar-trigger>
+              Изменить аватарку
+            </button>
+            <div class="profile-info">
+              <p class="muted small">Email</p>
+              <span>{{ user.email }}</span>
+            </div>
+            <form action="/auth/logout" method="post">
+              <button class="profile-link danger" type="submit">Выйти</button>
+            </form>
+          </div>
         </div>
-        <div class="flash ok hidden" data-username-flash aria-live="polite"></div>
-      </form>
-      <button class="profile-link" type="button" data-avatar-trigger>
-        Изменить аватарку
-      </button>
-      <div class="profile-info">
-        <p class="muted small">Email</p>
-        <span>{{ user.email }}</span>
       </div>
-      <form action="/auth/logout" method="post">
-        <button class="profile-link danger" type="submit">Выйти</button>
-      </form>
     </div>
   </header>
   {% endif %}
